@@ -1,0 +1,45 @@
+using Microsoft.EntityFrameworkCore;
+using MyAspNetCoreApp.Web.Helpers;
+using MyAspNetCoreApp.Web.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ProjectContext>(options => 
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
+});
+
+// Singleton'ýn ömrü program kapanana kadardýr
+//builder.Services.AddSingleton<IHelper,Helper>();
+
+//Scoped'ýn ömrü request -> response'a dönüþene kadardýr
+builder.Services.AddScoped<IHelper, Helper>();
+
+//Transient'ýn ömrü her class ile karþýlaþtýðýnda üretilir
+//builder.Services.AddTransient<IHelper, Helper>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Ornek}/{action=Index}/{id?}");
+
+app.Run();
