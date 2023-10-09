@@ -8,7 +8,7 @@ namespace Repositories.Contracts
 {
     public interface IRepositoryManager
     {
-        IBookRepository BookRepository { get; }
+        IBookRepository Book { get; }
         void Save();
     }
 }
