@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.Contracts
 {
-	public interface ILoggerContracts
+	public interface ILoggerService
 	{
 		void LogInfo(string message);
 		void LogWarning(string message);
