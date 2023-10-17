@@ -1,28 +1,22 @@
 ﻿using Entities.Models;
 using Repositories.Contracts;
 using Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
-    public class BookManager : IBookService
+	public class BookManager : IBookService
     {
         private readonly IRepositoryManager _manager;
+        private readonly ILoggerService _logger;
 
-        public BookManager(IRepositoryManager manager)
+		public BookManager(IRepositoryManager manager, ILoggerService logger)
+		{
+			_manager = manager;
+			_logger = logger;
+		}
+
+		public Book CreateOneBook(Book book)
         {
-            _manager = manager;
-        }
-
-        public Book CreateOneBook(Book book)
-        {
-            if(book is null)
-                throw new ArgumentNullException(nameof(book));
-
             _manager.Book.CreateOneBook(book);
             _manager.Save();
             return book;
@@ -32,9 +26,13 @@ namespace Services
         {
             var entity = _manager.Book.GetOneBookById(id, false);
             if (entity is null)
-                throw new Exception($"Book with id: {id} could not found");
+            {
+                string message = $"The book with id:{id} could not found";
+				_logger.LogInfo(message);
+				throw new Exception(message);
+			}
 
-            _manager.Book.DeleteOneBook(entity);
+			_manager.Book.DeleteOneBook(entity);
             _manager.Save();
         }
 
@@ -52,8 +50,12 @@ namespace Services
         {
             var entity = _manager.Book.GetOneBookById(id, false);
             if (entity is null)
-                throw new Exception($"Book with id: {id} could not found");
-
+            {
+                string message = $"Book with id: {id} could not found";
+                _logger.LogInfo(message);
+				throw new Exception(message);
+			}
+               
             if(book is null)
                 throw new ArgumentNullException(nameof(book));
 
