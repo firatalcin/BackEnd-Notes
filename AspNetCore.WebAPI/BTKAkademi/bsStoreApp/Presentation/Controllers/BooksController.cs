@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Entities.Exceptions.NotFoundException;
 
 namespace Presentation.Controllers
 {
@@ -36,9 +37,6 @@ namespace Presentation.Controllers
             var book = _manager
             .BookService
             .GetOneBookById(id, false);
-
-            if (book is null)
-                return NotFound(); //404
 
             return Ok(book);
 
