@@ -24,75 +24,51 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult GetAllBooks()
         {
-            try
-            {
-                var books = _manager.BookService.GetAllBooks(false);
-                return Ok(books);
-            }
-            catch (Exception ex)
-            {
+            var books = _manager.BookService.GetAllBooks(false);
+            return Ok(books);
 
-                throw new Exception(ex.Message);
-            }
         }
 
         [HttpGet("{id:int}")]
         public IActionResult GetBook([FromRoute(Name = "id")] int id)
         {
-            try
-            {
-                var book = _manager
-                .BookService
-                .GetOneBookById(id, false);
 
-                if (book is null)
-                    return NotFound(); //404
+            var book = _manager
+            .BookService
+            .GetOneBookById(id, false);
 
-                return Ok(book);
-            }
-            catch (Exception ex)
-            {
+            if (book is null)
+                return NotFound(); //404
 
-                throw new Exception(ex.Message);
-            }
+            return Ok(book);
+
+
         }
 
         [HttpPost]
         public IActionResult CreateOneBook([FromBody] Book book)
         {
-            try
-            {
-                if (book is null)
-                    return BadRequest();
 
-                _manager.BookService.CreateOneBook(book);
+            if (book is null)
+                return BadRequest();
 
-                return StatusCode(201, book);
-            }
-            catch (Exception ex)
-            {
+            _manager.BookService.CreateOneBook(book);
 
-                return BadRequest(ex.Message);
-            }
+            return StatusCode(201, book);
+
         }
 
         [HttpPut("{id:int}")]
         public IActionResult UpdateOneBook([FromRoute(Name = "id")] int id, [FromBody] Book book)
         {
-            try
-            {
-                if (book is null)
-                    return BadRequest();
 
-                _manager.BookService.UpdateOneBook(id, book, true);
+            if (book is null)
+                return BadRequest();
 
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
+            _manager.BookService.UpdateOneBook(id, book, true);
 
-                throw new Exception(ex.Message);
-            }
+            return NoContent();
+
         }
 
         [HttpDelete("{id:int}")]
