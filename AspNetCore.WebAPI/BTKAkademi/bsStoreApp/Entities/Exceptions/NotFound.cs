@@ -1,8 +1,8 @@
 ﻿namespace Entities.Exceptions
 {
-    public abstract partial class NotFound : Exception
+    public abstract partial class NotFoundException : Exception
     {
-        protected NotFound(string message) : base(message)
+        protected NotFoundException(string message) : base(message)
         {
             
         }
