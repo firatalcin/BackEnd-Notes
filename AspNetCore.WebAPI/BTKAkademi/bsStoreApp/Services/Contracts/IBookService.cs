@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.DTOs;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Services.Contracts
         IEnumerable<Book> GetAllBooks(bool trackChange);
         Book GetOneBookById(int id, bool trackChange);
         Book CreateOneBook(Book book);
-        void UpdateOneBook(int id, Book book, bool trackChange);
+        void UpdateOneBook(int id, BookDtoForUpdate bookDto, bool trackChange);
         void DeleteOneBook(int id, bool trackChanges); 
     }
 }
