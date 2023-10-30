@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2_OpenClosed", "2_OpenClose
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_LiskovSubstitution", "3_LiskovSubstitution\3_LiskovSubstitution.csproj", "{B938328A-4798-4C32-9F84-BD6C93D810E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_InterfaceSegregation", "4_InterfaceSegregation\4_InterfaceSegregation.csproj", "{F7252879-2126-4539-8FF5-6F51720E40E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B938328A-4798-4C32-9F84-BD6C93D810E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B938328A-4798-4C32-9F84-BD6C93D810E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B938328A-4798-4C32-9F84-BD6C93D810E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7252879-2126-4539-8FF5-6F51720E40E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7252879-2126-4539-8FF5-6F51720E40E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7252879-2126-4539-8FF5-6F51720E40E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7252879-2126-4539-8FF5-6F51720E40E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
