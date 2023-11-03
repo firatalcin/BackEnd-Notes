@@ -20,7 +20,11 @@ namespace Swagger.API.Controllers
             _context = context;
         }
 
-        // GET: api/Products
+        /// <summary>
+        /// Bu endpoint tüm ürünleri list olarak döner
+        /// </summary>
+        /// <returns></returns>
+        [Produces("application/json")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
@@ -31,7 +35,12 @@ namespace Swagger.API.Controllers
             return await _context.Products.ToListAsync();
         }
 
-        // GET: api/Products/5
+        /// <summary>
+        /// Bu endpoint verilen id sahip ürünü döner
+        /// </summary>
+        /// <param name="id">ürünün id'si</param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
