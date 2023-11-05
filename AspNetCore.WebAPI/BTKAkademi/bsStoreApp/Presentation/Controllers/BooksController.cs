@@ -69,7 +69,12 @@ namespace Presentation.Controllers
             if (bookDto is null)
                 return BadRequest();
 
-            _manager.BookService.UpdateOneBook(id, bookDto, true);
+			if (!ModelState.IsValid)
+			{
+				return UnprocessableEntity(ModelState);
+			}
+
+			_manager.BookService.UpdateOneBook(id, bookDto, false);
 
             return NoContent();
 
