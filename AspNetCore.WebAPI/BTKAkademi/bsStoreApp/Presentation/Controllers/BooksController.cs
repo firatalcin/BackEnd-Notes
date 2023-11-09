@@ -13,7 +13,8 @@ using static Entities.Exceptions.NotFoundException;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
+	[ServiceFilter(typeof(LogFilterAttribute))]
+	[ApiController]
     [Route("api/books")]
     public class BooksController : ControllerBase
     {
