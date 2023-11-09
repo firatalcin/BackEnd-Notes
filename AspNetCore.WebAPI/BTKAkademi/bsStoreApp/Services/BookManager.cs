@@ -30,9 +30,7 @@ namespace Services
 
         public async Task DeleteOneBookAsync(int id, bool trackChanges)
         {
-            var entity = await _manager.Book.GetOneBookByIdAsync(id, false);
-            if (entity is null)
-                throw new BookNotFoundException(id);
+            var entity = await GetOneBookAndCheckExits(id, trackChanges);
 
 			_manager.Book.DeleteOneBook(entity);
             await _manager.SaveAsync();
@@ -46,25 +44,29 @@ namespace Services
 
         public async Task<BookDto> GetOneBookByIdAsync(int id, bool trackChange)
         {
-            var book = await _manager.Book.GetOneBookByIdAsync(id, trackChange);
-            if (book is null)
-                throw new BookNotFoundException(id);
+			var entity = await GetOneBookAndCheckExits(id, trackChange);
 
-            return _mapper.Map<BookDto>(book);
+			return _mapper.Map<BookDto>(entity);
         }
 
         public async Task UpdateOneBookAsync(int id, BookDtoForUpdate bookDto, bool trackChange)
         {
-            var entity = await _manager.Book.GetOneBookByIdAsync(id, false);
-            if (entity is null)
-                throw new BookNotFoundException(id);
+			var entity = await GetOneBookAndCheckExits(id, trackChange);
 
-            //entity.Title = book.Title;
-            //entity.Price = book.Price;
-            entity = _mapper.Map<Book>(bookDto);
+			entity = _mapper.Map<Book>(bookDto);
 
             _manager.Book.Update(entity);
             await _manager.SaveAsync();
         }
-    }
+
+        private async Task<Book> GetOneBookAndCheckExits(int id, bool trackChanges)
+        {
+			var entity = await _manager.Book.GetOneBookByIdAsync(id, false);
+
+			if (entity is null)
+				throw new BookNotFoundException(id);
+
+            return entity;
+		}
+	}
 }
