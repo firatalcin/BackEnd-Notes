@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DTOs;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Repositories.Contracts;
 using Services.Contracts;
 using static Entities.Exceptions.NotFoundException;
@@ -36,9 +37,9 @@ namespace Services
             await _manager.SaveAsync();
         }
 
-        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(bool trackChange)
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(BookParameters bookParameters, bool trackChange)
         {
-            var books = await _manager.Book.GetAllBooksAsync(trackChange);
+            var books = await _manager.Book.GetAllBooksAsync(bookParameters, trackChange);
             return  _mapper.Map<IEnumerable<BookDto>>(books);
         }
 
