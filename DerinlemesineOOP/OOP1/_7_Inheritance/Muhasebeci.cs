@@ -27,4 +27,19 @@ namespace _7_Inheritance
 		public string Soyadi { get; set; }
 		public bool MedeniHal { get; set; }
 	}
+
+	public class MyClass
+	{
+        public MyClass(int a)
+        {
+            
+        }
+    }
+
+	public class MyClass2 : MyClass
+	{
+		public MyClass2(int a) : base(a)
+		{
+		}
+	}
 }
