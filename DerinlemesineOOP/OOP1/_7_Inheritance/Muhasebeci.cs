@@ -26,7 +26,8 @@ namespace _7_Inheritance
 		public string Adi { get; set; }
 		public string Soyadi { get; set; }
 		public bool MedeniHal { get; set; }
-	}
+        public bool EhliyetVarMi { get; set; }
+    }
 
 	public class MyClass
 	{
