@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartConsoleApp", "StartCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark.ConsoleApp", "Benchmark.ConsoleApp\Benchmark.ConsoleApp.csproj", "{B99B11A2-C664-4DC9-912E-FAB284AE8BE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsNoTracking", "AsNoTracking\AsNoTracking.csproj", "{BE2B1594-B2BF-4974-8D7D-C122024CD783}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsNoTracking", "AsNoTracking\AsNoTracking.csproj", "{BE2B1594-B2BF-4974-8D7D-C122024CD783}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleOrUnique", "SingleOrUnique\SingleOrUnique.csproj", "{9E5D4590-9B16-47B7-9E40-56B534852EBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BE2B1594-B2BF-4974-8D7D-C122024CD783}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE2B1594-B2BF-4974-8D7D-C122024CD783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE2B1594-B2BF-4974-8D7D-C122024CD783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5D4590-9B16-47B7-9E40-56B534852EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5D4590-9B16-47B7-9E40-56B534852EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5D4590-9B16-47B7-9E40-56B534852EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5D4590-9B16-47B7-9E40-56B534852EBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
