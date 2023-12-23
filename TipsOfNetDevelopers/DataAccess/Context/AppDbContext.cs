@@ -10,6 +10,11 @@ namespace DataAccess.Context
             optionsBuilder.UseSqlServer("server=.; database=TipsForNetDevelopers; Trusted_Connection=True; Integrated Security=true;trustServerCertificate=true");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().HasIndex(x => x.Name).IsUnique();
+        }
+
         public DbSet<Product> Products { get; set; } 
     }
 }
