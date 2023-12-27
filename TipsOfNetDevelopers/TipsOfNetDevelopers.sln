@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingleOrUnique", "SingleOrU
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagination", "Pagination\Pagination.csproj", "{3EE10E51-EFC6-4681-A285-A71924EA66E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asenkron", "Asenkron\Asenkron.csproj", "{9EEA51E0-694A-448C-83D3-5D83D35D456B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asenkron", "Asenkron\Asenkron.csproj", "{9EEA51E0-694A-448C-83D3-5D83D35D456B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CancellationTokenAPI", "CancellationTokenAPI\CancellationTokenAPI.csproj", "{52176E2A-CA61-4BA8-ADFA-1F4440A6DB0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{9EEA51E0-694A-448C-83D3-5D83D35D456B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EEA51E0-694A-448C-83D3-5D83D35D456B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EEA51E0-694A-448C-83D3-5D83D35D456B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52176E2A-CA61-4BA8-ADFA-1F4440A6DB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52176E2A-CA61-4BA8-ADFA-1F4440A6DB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52176E2A-CA61-4BA8-ADFA-1F4440A6DB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52176E2A-CA61-4BA8-ADFA-1F4440A6DB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
