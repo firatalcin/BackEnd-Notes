@@ -15,6 +15,7 @@ namespace DataAccess.Context
             modelBuilder.Entity<Product>().HasIndex(x => x.Name).IsUnique();
         }
 
-        public DbSet<Product> Products { get; set; } 
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ErrorLog> ErrorLoggers { get; set; }
     }
 }
