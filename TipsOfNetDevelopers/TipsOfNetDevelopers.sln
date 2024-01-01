@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asenkron", "Asenkron\Asenkr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CancellationTokenAPI", "CancellationTokenAPI\CancellationTokenAPI.csproj", "{52176E2A-CA61-4BA8-ADFA-1F4440A6DB0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorLog", "ErrorLog\ErrorLog.csproj", "{E8D20C17-35BC-4644-9B7F-A1C5C4F762ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorLog", "ErrorLog\ErrorLog.csproj", "{E8D20C17-35BC-4644-9B7F-A1C5C4F762ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQueryable", "IQueryable\IQueryable.csproj", "{73367EE5-6788-45A4-BAB1-81DD661BD0A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{E8D20C17-35BC-4644-9B7F-A1C5C4F762ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8D20C17-35BC-4644-9B7F-A1C5C4F762ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8D20C17-35BC-4644-9B7F-A1C5C4F762ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
