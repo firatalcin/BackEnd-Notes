@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorLog", "ErrorLog\ErrorL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQueryable", "IQueryable\IQueryable.csproj", "{73367EE5-6788-45A4-BAB1-81DD661BD0A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Record", "Record\Record.csproj", "{8D276CE9-71E7-44E6-8D16-DB2062A92686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73367EE5-6788-45A4-BAB1-81DD661BD0A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D276CE9-71E7-44E6-8D16-DB2062A92686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D276CE9-71E7-44E6-8D16-DB2062A92686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D276CE9-71E7-44E6-8D16-DB2062A92686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D276CE9-71E7-44E6-8D16-DB2062A92686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
