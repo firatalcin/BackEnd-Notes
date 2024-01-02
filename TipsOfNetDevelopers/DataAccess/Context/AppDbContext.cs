@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Context
 {
+    //Sealed keyword'ü inherit edilemez demektir.
     public sealed class AppDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
