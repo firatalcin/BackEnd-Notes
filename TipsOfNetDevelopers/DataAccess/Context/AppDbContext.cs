@@ -18,5 +18,6 @@ namespace DataAccess.Context
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ErrorLog> ErrorLoggers { get; set; }
+        public DbSet<PerformanceLog> PerformanceLogs { get; set; }
     }
 }
