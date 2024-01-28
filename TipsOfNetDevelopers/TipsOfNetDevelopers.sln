@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsReadOnly", "AsReadOnly\As
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnyAllMethod", "AnyAllMethod\AnyAllMethod.csproj", "{FDCA05B7-7446-40B6-AE64-D92E0DDA90F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EagerLazyLoading", "EagerLazyLoading\EagerLazyLoading.csproj", "{C973BC13-9119-4FDD-B2C8-B764A8578DBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EagerLazyLoading", "EagerLazyLoading\EagerLazyLoading.csproj", "{C973BC13-9119-4FDD-B2C8-B764A8578DBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationAPI", "AuthorizationAPI\AuthorizationAPI.csproj", "{8E741201-7A1E-4BB4-A466-A6DE8EE8D798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{C973BC13-9119-4FDD-B2C8-B764A8578DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C973BC13-9119-4FDD-B2C8-B764A8578DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C973BC13-9119-4FDD-B2C8-B764A8578DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E741201-7A1E-4BB4-A466-A6DE8EE8D798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E741201-7A1E-4BB4-A466-A6DE8EE8D798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E741201-7A1E-4BB4-A466-A6DE8EE8D798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E741201-7A1E-4BB4-A466-A6DE8EE8D798}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

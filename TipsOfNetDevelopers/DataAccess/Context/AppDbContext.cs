@@ -20,5 +20,8 @@ namespace DataAccess.Context
         public DbSet<ErrorLog> ErrorLoggers { get; set; }
         public DbSet<PerformanceLog> PerformanceLogs { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
     }
 }
