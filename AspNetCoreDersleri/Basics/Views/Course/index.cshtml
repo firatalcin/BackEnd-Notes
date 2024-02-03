@@ -6,14 +6,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Contact Page</h1>
-    <p>
-        @Model.Id
-    </p>
-    <p>
-        @Model.Title
-    </p>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">CourseApp</a>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Kurslar</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container pb-3">
+        <main>
+            <p>
+                @Model.Id
+            </p>
+            <p>
+                @Model.Title
+            </p>
+            <p>
+                @Model.Description
+            </p>
+        </main>
+    </div>  
 </body>
 </html>
