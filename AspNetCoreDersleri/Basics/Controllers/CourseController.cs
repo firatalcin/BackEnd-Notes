@@ -16,8 +16,8 @@ namespace Basics.Controllers
         public IActionResult List(){
 
             List<Course> courses = new List<Course>(){
-                new Course(){Id = 1, Title = ".Net Core"},
-                new Course(){Id = 2, Title = "Spring Boot"}
+                new Course(){Id = 1, Title = ".Net Core", Description = "C# ile yazýlýr", Image = "1.png"},
+                new Course(){Id = 2, Title = "Spring Boot", Description = "Java ile yazýlýr", Image = "2.jpg"}
             };
             return View(courses);
         }
