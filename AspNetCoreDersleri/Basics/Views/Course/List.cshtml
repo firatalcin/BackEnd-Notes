@@ -2,17 +2,5 @@
 
     @foreach (var item in Model)
     {
-        <div class="card mb-3" id="kurs_@item.Id">
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="~/images/@item.Image" width="200" alt="resim" />
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5>@item.Title</h5>
-                        <p>@item.Description</p>
-                    </div>                      
-                </div>
-            </div>
-        </div>
+       @await Html.PartialAsync("Partials/_CourseCardPartial", item)
     }
