@@ -9,6 +9,7 @@
 <body>
     <header>
        @await Html.PartialAsync("Partials/_NavbarPartial.cshtml")
+       @RenderSection("Partials/_Header", false)
     </header>
 
     <div class="container mt-3">
