@@ -13,13 +13,14 @@ namespace Basics.Controllers
             return View(kurs);
         }
 
-        public IActionResult List(){
+        public IActionResult List(){         
+            return View(Repository.Courses);
+        }
 
-            List<Course> courses = new List<Course>(){
-                new Course(){Id = 1, Title = ".Net Core", Description = "C# ile yazýlýr", Image = "1.png"},
-                new Course(){Id = 2, Title = "Spring Boot", Description = "Java ile yazýlýr", Image = "2.jpg"}
-            };
-            return View(courses);
+        public IActionResult Details(int id){
+            var kurs = Repository.GetById(id);
+
+            return View(kurs);
         }
 
     }
