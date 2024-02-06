@@ -11,7 +11,10 @@ namespace WebUI
 
             var app = builder.Build();
 
-            app.MapGet("/", () => "Hello World!");
+            app.MapControllerRoute(
+                name: "Default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
 
             app.Run();
         }
