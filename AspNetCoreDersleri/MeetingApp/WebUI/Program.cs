@@ -11,6 +11,10 @@ namespace WebUI
 
             var app = builder.Build();
 
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
             app.MapControllerRoute(
                 name: "Default",
                 pattern: "{controller=Home}/{action=Index}/{id?}"
