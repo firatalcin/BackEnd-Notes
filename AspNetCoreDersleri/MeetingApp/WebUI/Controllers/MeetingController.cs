@@ -17,7 +17,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Apply(string Name, string Phone, string Email, bool WillAttend)
+        public IActionResult Apply(UserInfo userInfo)
         {
             return View();
         }
