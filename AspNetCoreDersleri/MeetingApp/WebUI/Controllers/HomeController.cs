@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -13,7 +14,15 @@ namespace WebUI.Controllers
 
             //ViewData["Selamla"] = selamlama;
 
-            return View();
+            var meetingInfo = new MeetingAppInfo()
+            {
+                Id = 1,
+                Location = "İstanbul, Abc Kongre Merkezi",
+                Date = new DateTime(2025, 01, 20, 20, 0, 0),
+                NumberOfPeople = 100
+            };
+
+            return View(meetingInfo);
         }
     }
 }
