@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -9,7 +10,14 @@ namespace WebUI.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Apply()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Apply(string Name, string Phone, string Email, bool WillAttend)
         {
             return View();
         }
