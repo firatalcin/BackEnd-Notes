@@ -21,7 +21,8 @@ namespace WebUI.Controllers
 
         public IActionResult List()
         {
-            return View();
+            var model = Repository.Users();
+            return View(model);
         }
     }
 }
