@@ -5,11 +5,6 @@ namespace WebUI.Controllers
 {
     public class MeetingController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Apply()
         {
@@ -19,7 +14,9 @@ namespace WebUI.Controllers
         [HttpPost]
         public IActionResult Apply(UserInfo userInfo)
         {
-            return View();
+            Repository.CreateUser(userInfo);
+            ViewBag.UserCount = Repository.Users().Where(x => x.WillAttend == true).Count();
+            return View("Thanks", userInfo);
         }
 
         public IActionResult List()
