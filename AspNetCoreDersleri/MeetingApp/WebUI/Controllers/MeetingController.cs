@@ -24,5 +24,11 @@ namespace WebUI.Controllers
             var model = Repository.Users();
             return View(model);
         }
+
+        public IActionResult Details(int id)
+        {
+            var model = Repository.GetUserDetail(id);
+            return View(model);
+        }
     }
 }
