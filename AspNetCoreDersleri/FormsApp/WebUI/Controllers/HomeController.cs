@@ -23,9 +23,14 @@ namespace WebUI.Controllers
                 products = products.Where(x => x.CategoryId == int.Parse(category)).ToList();
             }
 
-            ViewBag.Categories = new SelectList(Repository.GetCategoryList(), "Id", "Name");
+            //ViewBag.Categories = new SelectList(Repository.GetCategoryList(), "Id", "Name", category);
 
-            return View(products);
+            var model = new ProductViewModel();
+            model.Products = products;
+            model.Categories = Repository.GetCategoryList();
+            model.SelectedCategory = category;
+
+            return View(model);
         }
 
         public IActionResult Privacy()
