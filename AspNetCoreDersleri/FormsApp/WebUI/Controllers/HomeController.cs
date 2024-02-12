@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using WebUI.FakeDb;
 using WebUI.Models;
@@ -7,7 +8,7 @@ namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string searchString, string category)
         {
             var products = Repository.GetProductList();
             ViewBag.SearchString = searchString;
@@ -16,6 +17,13 @@ namespace WebUI.Controllers
             {
                 products = Repository.GetProductList().Where(x => x.Name.ToLower().Contains(searchString)).ToList();
             }
+
+            if (!String.IsNullOrEmpty(category) && category != "0")
+            {
+                products = products.Where(x => x.CategoryId == int.Parse(category)).ToList();
+            }
+
+            ViewBag.Categories = new SelectList(Repository.GetCategoryList(), "Id", "Name");
 
             return View(products);
         }
