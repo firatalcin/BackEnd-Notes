@@ -32,5 +32,10 @@ namespace WebUI.FakeDb
         {
             return _categories;
         }
+
+        public static void CreateProduct(Product entity)
+        {
+            _products.Add(entity);
+        }
     }
 }

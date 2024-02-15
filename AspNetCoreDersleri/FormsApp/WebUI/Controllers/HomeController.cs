@@ -45,10 +45,42 @@ namespace WebUI.Controllers
             return View();
         }
 
+
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(Product model, IFormFile imageFile)
         {
-            return View();
+            var extension = "";
+            if (imageFile != null)
+            {
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                extension = Path.GetExtension(imageFile.FileName); // abc.jpg
+
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ModelState.AddModelError("", "Geçerli bir resim seçiniz.");
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (imageFile != null)
+                {
+                    var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+                    model.Image = randomFileName;
+                    model.ProductId = Repository.GetProductList().Count + 1;
+                    Repository.CreateProduct(model);
+                    return RedirectToAction("Index");
+                }
+
+            }
+            ViewBag.Categories = new SelectList(Repository.GetProductList(), "CategoryId", "Name");
+            return View(model);
+
         }
     }
 }
