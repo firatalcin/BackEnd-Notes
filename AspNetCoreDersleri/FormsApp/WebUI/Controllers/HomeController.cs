@@ -41,6 +41,7 @@ namespace WebUI.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Categories = new SelectList(Repository.GetCategoryList(), "CategoryId", "Name");
             return View();
         }
 
