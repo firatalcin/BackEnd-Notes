@@ -45,7 +45,6 @@ namespace WebUI.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Create(Product model, IFormFile imageFile)
         {
@@ -72,7 +71,7 @@ namespace WebUI.Controllers
                         await imageFile.CopyToAsync(stream);
                     }
                     model.Image = randomFileName;
-                    model.ProductId = Repository.GetProductList().Count + 1;
+                    model.Id = Repository.GetProductList().Count + 1;
                     Repository.CreateProduct(model);
                     return RedirectToAction("Index");
                 }
@@ -81,6 +80,21 @@ namespace WebUI.Controllers
             ViewBag.Categories = new SelectList(Repository.GetProductList(), "CategoryId", "Name");
             return View(model);
 
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var entity = Repository.GetProductList().FirstOrDefault(p => p.Id == id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Categories = new SelectList(Repository.GetCategoryList(), "CategoryId", "Name");
+            return View(entity);
         }
     }
 }

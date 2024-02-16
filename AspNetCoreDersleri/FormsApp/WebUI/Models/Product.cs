@@ -5,7 +5,7 @@ namespace WebUI.Models
     public class Product
     {
         [Display(Name = "Urun Id")]
-        public int ProductId { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Gerekli bir alan")]
         [StringLength(100)]
