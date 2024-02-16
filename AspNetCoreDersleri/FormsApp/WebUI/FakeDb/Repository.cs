@@ -1,4 +1,5 @@
-﻿using WebUI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebUI.Models;
 
 namespace WebUI.FakeDb
 {
@@ -62,6 +63,16 @@ namespace WebUI.FakeDb
             if (entity != null)
             {
                 entity.IsActive = updatedProduct.IsActive;
+            }
+        }
+
+        public static void DeleteProduct(Product deletedProduct)
+        {
+            var entity = _products.FirstOrDefault(p => p.Id == deletedProduct.Id);
+
+            if (entity != null)
+            {
+                _products.Remove(entity);
             }
         }
 

@@ -125,5 +125,21 @@ namespace WebUI.Controllers
             ViewBag.Categories = new SelectList(Repository.GetCategoryList(), "CategoryId", "Name");
             return View(model);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var entity = Repository.GetProductList().FirstOrDefault(p => p.Id == id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            return View("DeleteConfirm", entity);
+        }
     }
 }
