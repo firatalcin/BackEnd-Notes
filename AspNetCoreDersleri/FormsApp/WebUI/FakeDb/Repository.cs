@@ -37,5 +37,33 @@ namespace WebUI.FakeDb
         {
             _products.Add(entity);
         }
+
+        public static void EditProduct(Product updatedProduct)
+        {
+            var entity = _products.FirstOrDefault(p => p.Id == updatedProduct.Id);
+
+            if (entity != null)
+            {
+                if (!string.IsNullOrEmpty(updatedProduct.Name))
+                {
+                    entity.Name = updatedProduct.Name;
+                }
+                entity.Price = updatedProduct.Price;
+                entity.Image = updatedProduct.Image;
+                entity.CategoryId = updatedProduct.CategoryId;
+                entity.IsActive = updatedProduct.IsActive;
+            }
+        }
+
+        public static void EditIsActive(Product updatedProduct)
+        {
+            var entity = _products.FirstOrDefault(p => p.Id == updatedProduct.Id);
+
+            if (entity != null)
+            {
+                entity.IsActive = updatedProduct.IsActive;
+            }
+        }
+
     }
 }
