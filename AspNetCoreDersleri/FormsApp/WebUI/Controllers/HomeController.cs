@@ -139,7 +139,25 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            return View("DeleteConfirm", entity);
+            return View("Delete", entity);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProduct(int id, int ProductId)
+        {
+            if (id != ProductId)
+            {
+                return NotFound();
+            }
+
+            var entity = Repository.GetProductList().FirstOrDefault(p => p.Id == ProductId);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            Repository.DeleteProduct(entity);
+            return RedirectToAction("Index");
         }
     }
 }
