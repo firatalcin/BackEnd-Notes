@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WebUI.Context;
+
 namespace WebUI
 {
     public class Program
@@ -8,6 +11,11 @@ namespace WebUI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("database"));
+            });
 
             var app = builder.Build();
 
