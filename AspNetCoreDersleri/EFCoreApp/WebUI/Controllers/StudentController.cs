@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebUI.Context;
 using WebUI.Data;
 
@@ -11,6 +12,13 @@ namespace WebUI.Controllers
         public StudentController(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            List<Student> students = await _appDbContext.Students.ToListAsync();
+            return View(students);
         }
 
         [HttpGet]
