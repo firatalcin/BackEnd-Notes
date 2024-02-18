@@ -89,5 +89,37 @@ namespace WebUI.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var ogrenci = await _appDbContext.Students.FindAsync(id);
+
+            if (ogrenci == null)
+            {
+                return NotFound();
+            }
+
+            return View(ogrenci);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromForm] int id)
+        {
+            var ogrenci = await _appDbContext.Students.FindAsync(id);
+            if (ogrenci == null)
+            {
+                return NotFound();
+            }
+            _appDbContext.Students.Remove(ogrenci);
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
     }
 }
