@@ -34,5 +34,60 @@ namespace WebUI.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index", "Home");           
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var ogr = await _appDbContext
+                                .Students
+                                //.Include(o => o.KursKayitlari)
+                                //.ThenInclude(o => o.Kurs)
+                                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (ogr == null)
+            {
+                return NotFound();
+            }
+
+            return View(ogr);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Student model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _appDbContext.Update(model);
+                    await _appDbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_appDbContext.Students.Any(o => o.Id == model.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
     }
 }
