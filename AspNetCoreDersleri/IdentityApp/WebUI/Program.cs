@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebUI.Context;
+using WebUI.Models;
 
 namespace WebUI
 {
@@ -40,6 +41,8 @@ namespace WebUI
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            SeedData.IdentityTestUser(app);
 
             app.Run();
         }
