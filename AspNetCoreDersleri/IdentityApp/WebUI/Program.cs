@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using WebUI.Context;
+
 namespace WebUI
 {
     public class Program
@@ -5,6 +9,13 @@ namespace WebUI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<AppDbContext>(opt =>
+            {
+                opt.UseSqlite(builder.Configuration.GetConnectionString("sql"));
+            });
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
