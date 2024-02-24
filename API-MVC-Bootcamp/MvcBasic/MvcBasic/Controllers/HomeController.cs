@@ -15,7 +15,13 @@ namespace MvcBasic.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Name = "Fýrat";
+            ViewData["Name"] = "Fýrat";
+            TempData["Name"] = "Fýrat";
+
+            Customer customer = new Customer() { Age = 25, FirstName = "Fýrat", LastName = "Alçýn"}; 
+
+            return View(customer);
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Customer
+
+@{
     int age = 25;
     // string value = string.Empty;
     // if (age > 18)
@@ -28,4 +30,14 @@
 <p>
     
     Durum2 = @toplam
+    @ViewBag.Name
+</p>
+<p>
+    @ViewData["Name"]
+</p>
+<p>
+    @TempData["Name"]
+</p>
+<p>
+    @Model.FirstName @Model.LastName @Model.Age
 </p>
