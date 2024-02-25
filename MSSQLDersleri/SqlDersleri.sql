@@ -58,6 +58,25 @@ select Min(PersonelID) from Personeller
 select COUNT(PersonelID) from Personeller
 select sum(NakliyeUcreti) from Satislar
 
+-- String Metotlarý
 
+select LEFT(Adi,2) from Personeller
+select RIGHT(Adi,2) from Personeller
+select UPPER(Adi) from Personeller
+select Lower(Adi) from Personeller
+select SUBSTRING(Adi,3,2) from Personeller
+select LTRIM('       Fýrat')
+select RTRIM('Fýrat       ')
+select REVERSE(Adi) from Personeller
+select REPLACE('Benim Adým Fýrat', 'Fýrat', 'Rýfat')
+select MusteriAdi, CHARINDEX(' ', MusteriAdi) from Musteriler
+
+
+-- Sayýsal Ýþlemler
+select PI()
+select POWER(2,3)
+select ABS(-100)
+select RAND()
+select FLOOR(RAND()*100)
 
 
