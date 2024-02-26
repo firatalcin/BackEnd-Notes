@@ -1,43 +1,22 @@
-﻿@model Customer
+﻿@model List<Customer>
 
-@{
-    int age = 25;
-    // string value = string.Empty;
-    // if (age > 18)
-    // {
-    //     value = "Yaşı 18'den büyük";
-    // }
-    // else
-    // {
-    //     value = "Yaşı 18'den küçük";
-    // }
+<table>
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Age</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-    int Calculate(int number1,int number2)
-    {
-        return number1 + number2;
-    }
-
-    var result = Calculate(1, 2);
-
-    int toplam = 0;
-
-    for (int i = 0; i < 10; i++)
-    {
-        toplam += i;
-    }
-}
-
-<p>
-    
-    Durum2 = @toplam
-    @ViewBag.Name
-</p>
-<p>
-    @ViewData["Name"]
-</p>
-<p>
-    @TempData["Name"]
-</p>
-<p>
-    @Model.FirstName @Model.LastName @Model.Age
-</p>

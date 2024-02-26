@@ -8,16 +8,8 @@ namespace MvcBasic.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Name = "Fýrat";
-            ViewData["Name"] = "Fýrat";
-            TempData["Name"] = "Fýrat";
-
-            var values = int.Parse(RouteData.Values["id"].ToString());
-
-            Customer customer = new Customer() { Age = 25, FirstName = "Fýrat", LastName = "Alçýn"}; 
-
-            //return View(customer);
-            return RedirectToAction("Index2");
+            var customers = CustomerContext.Customers;
+            return View(customers);
         }
 
         [Route("Fýrat")]
