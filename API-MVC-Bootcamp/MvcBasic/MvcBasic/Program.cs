@@ -1,3 +1,5 @@
+using Microsoft.Extensions.FileProviders;
+
 namespace MvcBasic
 {
     public class Program
@@ -17,6 +19,12 @@ namespace MvcBasic
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = "/firat",
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "node_modules"))
+            });
 
             app.UseRouting();
 

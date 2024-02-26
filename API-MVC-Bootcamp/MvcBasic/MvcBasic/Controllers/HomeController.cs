@@ -12,10 +12,39 @@ namespace MvcBasic.Controllers
             return View(customers);
         }
 
-        [Route("Fýrat")]
-        public IActionResult Index2()
+        [HttpGet]
+        public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Customer customer)
+        {
+            var lastCustomer= CustomerContext.Customers.Last();
+
+            var id = lastCustomer.Id + 1;
+
+            CustomerContext.Customers.Add(
+                new Customer { 
+                    Id = id, 
+                    FirstName = customer.FirstName, 
+                    LastName = customer.LastName, 
+                    Age = customer.Age 
+                });
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Remove(int id) 
+        {
+
+            var customer = CustomerContext.Customers.Find(x => x.Id == id);
+            CustomerContext.Customers.Remove(customer);
+
+
+            return RedirectToAction("Index");
         }
     }
 }
