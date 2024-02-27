@@ -8,7 +8,7 @@
     <body>
     <div class="container">
         <h3>Customer List</h3>
-        <a href="/Home/Add">Ekle</a>
+        <a asp-controller="Home" asp-action="Add">Ekle</a>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
@@ -26,8 +26,8 @@
                         <td>@item.LastName</td>
                         <td>@item.Age</td>
                         <td>
-                            <a href="/Home/Update/@item.Id">Güncelle</a>
-                            <a href="/Home/Remove/@item.Id">Sil</a>
+                            <a asp-controller="Home" asp-action="Update" asp-route-id="@item.Id">Güncelle</a>
+                            <a asp-controller="Home" asp-action="Remove" asp-route-id="@item.Id">Sil</a>
                         </td>
                     </tr>
                 }
