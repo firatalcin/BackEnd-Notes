@@ -46,5 +46,27 @@ namespace MvcBasic.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var customer = CustomerContext.Customers.FirstOrDefault(x => x.Id == id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Customer customerModel)
+        {
+            var customer = CustomerContext.Customers.FirstOrDefault(x => x.Id == customerModel.Id);
+
+            customer.FirstName = customerModel.FirstName;
+            customer.LastName = customerModel.LastName;
+            customer.Age = customerModel.Age;
+
+            
+
+            return RedirectToAction("Index");
+
+        }
     }
 }
