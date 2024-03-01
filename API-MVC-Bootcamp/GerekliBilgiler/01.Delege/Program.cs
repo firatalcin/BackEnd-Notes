@@ -22,5 +22,10 @@
         {
             Console.WriteLine(number1*number2);
         }
+
+        static void Cıkar(int number1, int number2)
+        {
+            Console.WriteLine(number1-number2);
+        }
     }
 }
