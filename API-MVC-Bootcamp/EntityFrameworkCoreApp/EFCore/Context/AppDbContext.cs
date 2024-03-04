@@ -12,5 +12,16 @@ namespace EFCore.Context
         {
             optionsBuilder.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= UdemyEFCore; integrated security=true;TrustServerCertificate=True");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().Property(x => x.Name).HasColumnName("product_name");
+            modelBuilder.Entity<Product>().Property(x => x.Name).HasMaxLength(100);
+            modelBuilder.Entity<Product>().Property(x => x.Name).IsRequired();
+
+            modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id");
+            modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price");
+            modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 3);
+        }
     }
 }
