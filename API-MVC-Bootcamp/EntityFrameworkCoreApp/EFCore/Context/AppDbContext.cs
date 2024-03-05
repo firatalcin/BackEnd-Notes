@@ -8,6 +8,8 @@ namespace EFCore.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<SaleHistory> SaleHistories { get; set; }
+        public DbSet<ProductDetail> ProductDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +29,17 @@ namespace EFCore.Context
             modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id");
             modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price");
             modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 3);
+
+            //modelBuilder.Entity<Product>().HasMany(x => x.SaleHistories).WithOne(x => x.Product).HasForeignKey(x => x.ProductId);
+            modelBuilder.Entity<SaleHistory>()
+                .HasOne(x => x.Product)
+                .WithMany(x => x.SaleHistories)
+                .HasForeignKey(x => x.ProductId);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(x => x.ProductDetail)
+                .WithOne(x => x.Product)
+                .HasForeignKey<ProductDetail>(x => x.ProductId);
         }
     }
 }
