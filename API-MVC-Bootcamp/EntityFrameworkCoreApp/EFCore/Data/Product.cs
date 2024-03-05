@@ -8,5 +8,6 @@
         public DateTime CreateDate { get; set; }
         public List<SaleHistory> SaleHistories { get; set; }
         public ProductDetail ProductDetail { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
     }
 }
