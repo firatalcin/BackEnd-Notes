@@ -11,6 +11,9 @@ namespace EFCore.Context
         public DbSet<SaleHistory> SaleHistories { get; set; }
         public DbSet<ProductDetail> ProductDetails { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<PartTimeEmployee> PartTimeEmployees { get; set; }
+        public DbSet<FullTimeEmployee> FullTimeEmployees { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
