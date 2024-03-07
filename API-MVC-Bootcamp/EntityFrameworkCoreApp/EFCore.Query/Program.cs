@@ -43,13 +43,31 @@ namespace EFCore.Query
 
             //context.SaveChanges();
 
-            var updatedBlog = context.Blogs.AsNoTracking().FirstOrDefault(x => x.Id == 2);
+            //var updatedBlog = context.Blogs.AsNoTracking().FirstOrDefault(x => x.Id == 2);
 
-            updatedBlog.Title = "Güncellendi";
+            //updatedBlog.Title = "Güncellendi";
 
-            var updatedBlogState = context.Entry(updatedBlog).State;
+            //var updatedBlogState = context.Entry(updatedBlog).State;
 
-            context.SaveChanges();
+            //context.SaveChanges();
+
+
+            //lazy, eager, explicit
+
+            //var blogs =context.Blogs.Include(x => x.Comments).ToList();
+
+            //foreach (var blog in blogs)
+            //{
+            //    Console.WriteLine($"{blog.Title} blogun yorumları");
+            //    foreach (var comment in blog.Comments)
+            //    {
+            //        Console.WriteLine($"     {comment.Content}");
+            //    }
+            //}
+
+            var blog = context.Blogs.SingleOrDefault(x => x.Id == 1);
+
+            context.Entry(blog).Collection(x => x.Comments).Load();
 
 
             Console.WriteLine("Hello, World!");

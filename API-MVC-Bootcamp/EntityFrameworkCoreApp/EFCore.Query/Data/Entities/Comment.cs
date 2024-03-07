@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EFCore.Query.Data.Entities
 {
-    public class Blog
+    public class Comment
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Url { get; set; }
-        public List<Comment> Comments { get; set; }
+        public string Content { get; set; }
+        public int BlogId { get; set; }
+        public Blog Blog { get; set; }
     }
 }
