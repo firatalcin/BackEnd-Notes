@@ -1,5 +1,6 @@
 ﻿using EFCore.Query.Data.Context;
 using EFCore.Query.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Query
 {
@@ -22,17 +23,33 @@ namespace EFCore.Query
 
 
             //IEnumerable & IQueryable
-            
-            var query = context.Blogs.AsQueryable();
 
-            var blogs1 = query.Where(x => x.Title.Contains("Blog 1") || x.Title.Contains("Blog 2")).AsEnumerable();
+            //var query = context.Blogs.AsQueryable();
 
-            var blogs2 = blogs1.Where(x => x.Title.Contains("Blog 1"));
+            //var blogs1 = query.Where(x => x.Title.Contains("Blog 1") || x.Title.Contains("Blog 2")).AsEnumerable();
 
-            foreach (var item in blogs2)
-            {
-                Console.WriteLine(item.Title);
-            }
+            //var blogs2 = blogs1.Where(x => x.Title.Contains("Blog 1"));
+
+            //foreach (var item in blogs2)
+            //{
+            //    Console.WriteLine(item.Title);
+            //}
+
+            //var updatedBlog = context.Blogs.FirstOrDefault(x => x.Id == 1);
+
+            //updatedBlog.Title = "Güncellendi";
+
+            //var updatedBlogState = context.Entry(updatedBlog).State;
+
+            //context.SaveChanges();
+
+            var updatedBlog = context.Blogs.AsNoTracking().FirstOrDefault(x => x.Id == 2);
+
+            updatedBlog.Title = "Güncellendi";
+
+            var updatedBlogState = context.Entry(updatedBlog).State;
+
+            context.SaveChanges();
 
 
             Console.WriteLine("Hello, World!");
