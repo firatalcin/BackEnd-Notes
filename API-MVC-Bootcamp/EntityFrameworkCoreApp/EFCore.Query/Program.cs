@@ -67,7 +67,7 @@ namespace EFCore.Query
 
             var blog = context.Blogs.SingleOrDefault(x => x.Id == 1);
 
-            context.Entry(blog).Collection(x => x.Comments).Load();
+            context.Entry(blog).Collection(x => x.Comments).Load(); 
 
 
             Console.WriteLine("Hello, World!");
