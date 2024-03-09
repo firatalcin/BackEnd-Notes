@@ -16,7 +16,7 @@ namespace EFCore.Query.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilde.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= UdemyEFCoreQuery; integrated security=true;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= UdemyEFCoreQuery; integrated security=true;TrustServerCertificate=True");
             optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
         }
 
