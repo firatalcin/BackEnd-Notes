@@ -71,12 +71,50 @@ select REVERSE(Adi) from Personeller
 select REPLACE('Benim Adým Fýrat', 'Fýrat', 'Rýfat')
 select MusteriAdi, CHARINDEX(' ', MusteriAdi) from Musteriler
 
-
 -- Sayýsal Ýþlemler
+
 select PI()
 select POWER(2,3)
 select ABS(-100)
 select RAND()
 select FLOOR(RAND()*100)
+
+-- Tarih Fonksiyonlarý
+
+Select GETDATE() -- Bu günün tarihini verir
+select DATEADD(DAY,999,GETDATE()) -- belirli bir tarihten sonrasý
+select DATEDIFF(YEAR, '19980416', GETDATE()) -- iki tarih arasýndaki farký
+select DATEPART(DAY,GETDATE())
+
+-- Top Komutu
+
+select top 3 * from Personeller
+
+-- Distinct Komutu
+
+select Distinct Sehir from Personeller
+
+-- Group By Komutu
+
+select KategoriID, COUNT(*) as 'Miktar' from Urunler where KategoriID > 5 group by KategoriID  
+select PersonelID, Sum(NakliyeUcreti) from Satislar Group By PersonelID having Sum(NakliyeUcreti) > 5000
+
+-- Tablolarý Yan yana birleþtirme
+
+select * from Personeller
+select * from Satislar
+select * from Personeller,Satislar
+
+-- Inner Join
+
+select * from Personeller as p
+inner join Satislar as s on p.PersonelID = s.PersonelID
+
+-- Çoklu Join
+
+select * from Urunler as u
+inner join Tedarikciler as t on u.TedarikciID = t.TedarikciID
+inner join Kategoriler as k on u.KategoriID = k.KategoriID
+
 
 
