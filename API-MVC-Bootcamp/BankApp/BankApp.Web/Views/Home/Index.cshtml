@@ -1,4 +1,4 @@
-﻿@model List<ApplicationUser>
+﻿@model List<UserListModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -9,6 +9,7 @@
         <tr>
             <th>Name</th>
             <th>Surname</th>
+            <th>Account Count</th>
             <th></th>
         </tr>
    </thead> 
@@ -18,7 +19,10 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Surname</td>
-                <td></td>
+                <td><getAccountCount application-user-id="@item.Id"></getAccountCount></td>
+                <td>
+                    <a asp-action="Create" asp-controller="Account" asp-route-id="@item.Id">Create New Account</a>
+                </td>
             </tr>
         }
    </tbody>

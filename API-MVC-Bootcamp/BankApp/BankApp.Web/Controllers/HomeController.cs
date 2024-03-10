@@ -16,7 +16,12 @@ namespace BankApp.Web.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.ApplicationUsers.ToList());
+            return View(_context.ApplicationUsers.Select(x => new UserListModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Surname = x.Surname
+            }).ToList());
         }
     }
 }
