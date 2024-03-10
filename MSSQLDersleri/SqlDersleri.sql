@@ -116,5 +116,31 @@ select * from Urunler as u
 inner join Tedarikciler as t on u.TedarikciID = t.TedarikciID
 inner join Kategoriler as k on u.KategoriID = k.KategoriID
 
+--DML Sorgularý
+-- Select
+
+select * from Personeller
+
+--Insert
+
+Insert Personeller (Adi) values ('Fýrat')
+
+--Update 
+
+update Personeller set Adi = 'Rýfat' where PersonelID = 1
+
+--Delete
+
+Delete Personeller where PersonelID = 1
+
+--Union
+select Adi, SoyAdi from Personeller
+union
+select MusteriAdi, MusteriUnvani from Musteriler
+
+-- With Rollup (Ara Toplam)
+select SatisID, UrunID, SUM(Miktar) from [Satis Detaylari]
+Group By SatisID, UrunID With Rollup
+
 
 
