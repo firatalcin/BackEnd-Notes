@@ -1,23 +1,19 @@
 using BankApp.Web.Data.Context;
-using BankApp.Web.Data.Repositories;
+using BankApp.Web.Data.Interfaces;
 using BankApp.Web.Mapping;
-using BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace BankApp.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _context;
-        private readonly ApplicationUserRepository _applicationUserRepository;
+        private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly IUserMapper _userMapper;
 
-        public HomeController(AppDbContext context, IUserMapper userMapper)
+        public HomeController(IUserMapper userMapper, IApplicationUserRepository applicationUserRepository)
         {
-            _context = context;
-            _applicationUserRepository = new ApplicationUserRepository(_context);
             _userMapper = userMapper;
+            _applicationUserRepository = applicationUserRepository;
         }
 
         public IActionResult Index()

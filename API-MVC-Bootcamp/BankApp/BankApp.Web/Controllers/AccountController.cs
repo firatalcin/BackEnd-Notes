@@ -1,5 +1,4 @@
-﻿using BankApp.Web.Data.Context;
-using BankApp.Web.Data.Interfaces;
+﻿using BankApp.Web.Data.Interfaces;
 using BankApp.Web.Mapping;
 using BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,15 +7,17 @@ namespace BankApp.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly AppDbContext _context;
         private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly IUserMapper _userMapper;
+        private readonly IAccountMapper _accountMapper;
 
-        public AccountController(AppDbContext context, IApplicationUserRepository applicationUserRepository, IUserMapper userMapper)
+        public AccountController(IApplicationUserRepository applicationUserRepository, IUserMapper userMapper, IAccountRepository accountRepository, IAccountMapper accountMapper)
         {
-            _context = context;
             _applicationUserRepository = applicationUserRepository;
             _userMapper = userMapper;
+            _accountRepository = accountRepository;
+            _accountMapper = accountMapper;
         }
 
         public IActionResult Create(int id)
@@ -28,14 +29,7 @@ namespace BankApp.Web.Controllers
         [HttpPost]
         public IActionResult Create(AccountCreateModel accountCreateModel)
         {
-            _context.Accounts.Add(new Data.Entities.Account
-            {
-                AccountNumber = accountCreateModel.AccountNumber,
-                Balance = accountCreateModel.Balance,
-                ApplicationUserId = accountCreateModel.ApplicationUserId
-            });
-
-            _context.SaveChanges();
+            _accountRepository.Create(_accountMapper.Map(accountCreateModel));
 
             return RedirectToAction("Index", "Home");
         }

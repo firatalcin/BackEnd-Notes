@@ -17,6 +17,8 @@ namespace BankApp.Web
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= BankDb; integrated security=true;TrustServerCertificate=True");
             });
 
+            builder.Services.AddScoped<IAccountMapper, AccountMapper>();
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<IUserMapper, UserMapper>();
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
