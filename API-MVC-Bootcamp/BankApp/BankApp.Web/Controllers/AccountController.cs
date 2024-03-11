@@ -1,4 +1,5 @@
 ﻿using BankApp.Web.Data.Context;
+using BankApp.Web.Data.Repositories;
 using BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,22 +8,18 @@ namespace BankApp.Web.Controllers
     public class AccountController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ApplicationUserRepository _applicationUserRepository;
 
         public AccountController(AppDbContext context)
         {
             _context = context;
+            _applicationUserRepository = new ApplicationUserRepository(_context);
         }
 
         public IActionResult Create(int id)
         {
-            var userInfo = _context.ApplicationUsers.Select(x => new UserListModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Surname = x.Surname
-            }).SingleOrDefault(x => x.Id == id);
-
-            return View();
+            var userInfo = _applicationUserRepository.Get(id);
+            return View(userInfo);
         }
 
         [HttpPost]
