@@ -1,9 +1,10 @@
 ﻿using BankApp.Web.Data.Context;
 using BankApp.Web.Data.Entities;
+using BankApp.Web.Data.Interfaces;
 
 namespace BankApp.Web.Data.Repositories
 {
-    public class ApplicationUserRepository
+    public class ApplicationUserRepository : IApplicationUserRepository
     {
         private readonly AppDbContext _context;
 
@@ -17,7 +18,7 @@ namespace BankApp.Web.Data.Repositories
             return _context.ApplicationUsers.ToList();
         }
 
-        public ApplicationUser Get(int id)
+        public ApplicationUser GetById(int id)
         {
             return _context.ApplicationUsers.SingleOrDefault(u => u.Id == id);
         }

@@ -1,4 +1,7 @@
 using BankApp.Web.Data.Context;
+using BankApp.Web.Data.Interfaces;
+using BankApp.Web.Data.Repositories;
+using BankApp.Web.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace BankApp.Web
@@ -12,7 +15,10 @@ namespace BankApp.Web
             builder.Services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= BankDb; integrated security=true;TrustServerCertificate=True");
-            }); 
+            });
+
+            builder.Services.AddScoped<IUserMapper, UserMapper>();
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
