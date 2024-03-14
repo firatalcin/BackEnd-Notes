@@ -1,4 +1,5 @@
-﻿using BankApp.Web.Data.Interfaces;
+﻿using BankApp.Web.Data.Entities;
+using BankApp.Web.Data.Interfaces;
 using BankApp.Web.Mapping;
 using BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -7,29 +8,35 @@ namespace BankApp.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IUserMapper _userMapper;
-        private readonly IAccountMapper _accountMapper;
+        private readonly IGenericRepository<Account> _accountRepository;
+        private readonly IGenericRepository<ApplicationUser> _applicationUserRepository;
 
-        public AccountController(IApplicationUserRepository applicationUserRepository, IUserMapper userMapper, IAccountRepository accountRepository, IAccountMapper accountMapper)
+        public AccountController(IGenericRepository<Account> accountRepository, IGenericRepository<ApplicationUser> applicationUserRepository)
         {
-            _applicationUserRepository = applicationUserRepository;
-            _userMapper = userMapper;
             _accountRepository = accountRepository;
-            _accountMapper = accountMapper;
+            _applicationUserRepository = applicationUserRepository;
         }
 
         public IActionResult Create(int id)
         {
             var userInfo = _applicationUserRepository.GetById(id);
-            return View(userInfo);
+            return View(new UserListModel
+            {
+                Id = userInfo.Id,
+                Name = userInfo.Name,
+                Surname = userInfo.Surname
+            });
         }
 
         [HttpPost]
         public IActionResult Create(AccountCreateModel accountCreateModel)
         {
-            _accountRepository.Create(_accountMapper.Map(accountCreateModel));
+            _accountRepository.Create(new Account
+            {
+                AccountNumber = accountCreateModel.AccountNumber,
+                Balance = accountCreateModel.Balance,
+                ApplicationUserId = accountCreateModel.ApplicationUserId
+            });
 
             return RedirectToAction("Index", "Home");
         }
