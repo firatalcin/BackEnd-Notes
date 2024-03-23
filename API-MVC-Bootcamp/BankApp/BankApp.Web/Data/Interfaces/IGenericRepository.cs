@@ -10,5 +10,6 @@ namespace BankApp.Web.Data.Interfaces
         List<T> GetAll();
         T GetById(int id);
         void Update(T entity);
+        IQueryable<T> GetQueryable();
     }
 }

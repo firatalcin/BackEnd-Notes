@@ -22,6 +22,7 @@
                 <td><getAccountCount application-user-id="@item.Id"></getAccountCount></td>
                 <td>
                     <a asp-action="Create" asp-controller="Account" asp-route-id="@item.Id">Create New Account</a>
+                    <a asp-action="GetByUserId" asp-controller="Account" asp-route-id="@item.Id">Get Account</a>
                 </td>
             </tr>
         }

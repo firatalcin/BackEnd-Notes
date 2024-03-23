@@ -39,5 +39,10 @@ namespace BankApp.Web.Data.Repositories
             _context.Set<T>().Update(entity);
             _context.SaveChanges();
         }
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
     }
 }
