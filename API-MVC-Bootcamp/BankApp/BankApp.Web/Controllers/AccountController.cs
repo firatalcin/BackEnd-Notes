@@ -1,5 +1,6 @@
 ﻿using BankApp.Web.Data.Entities;
 using BankApp.Web.Data.Interfaces;
+using BankApp.Web.Data.UnitOfWork;
 using BankApp.Web.Mapping;
 using BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +10,25 @@ namespace BankApp.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IGenericRepository<Account> _accountRepository;
-        private readonly IGenericRepository<ApplicationUser> _applicationUserRepository;
+        //private readonly IGenericRepository<Account> _accountRepository;
+        //private readonly IGenericRepository<ApplicationUser> _applicationUserRepository;
 
-        public AccountController(IGenericRepository<Account> accountRepository, IGenericRepository<ApplicationUser> applicationUserRepository)
+        //public AccountController(IGenericRepository<Account> accountRepository, IGenericRepository<ApplicationUser> applicationUserRepository)
+        //{
+        //    _accountRepository = accountRepository;
+        //    _applicationUserRepository = applicationUserRepository;
+        //}
+
+        private readonly IUow _uow;
+
+        public AccountController(IUow uow)
         {
-            _accountRepository = accountRepository;
-            _applicationUserRepository = applicationUserRepository;
+            _uow = uow;
         }
 
         public IActionResult Create(int id)
         {
-            var userInfo = _applicationUserRepository.GetById(id);
+            var userInfo = _uow.GetRepository<ApplicationUser>().GetById(id);
             return View(new UserListModel
             {
                 Id = userInfo.Id,
@@ -32,12 +40,14 @@ namespace BankApp.Web.Controllers
         [HttpPost]
         public IActionResult Create(AccountCreateModel accountCreateModel)
         {
-            _accountRepository.Create(new Account
+            _uow.GetRepository<Account>().Create(new Account
             {
                 AccountNumber = accountCreateModel.AccountNumber,
                 Balance = accountCreateModel.Balance,
                 ApplicationUserId = accountCreateModel.ApplicationUserId
             });
+
+            _uow.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
@@ -45,10 +55,10 @@ namespace BankApp.Web.Controllers
         [HttpGet]
         public IActionResult GetByUserId(int id) 
         {
-            var query = _accountRepository.GetQueryable();
+            var query = _uow.GetRepository<Account>().GetQueryable();
             var accounts = query.Where(x => x.ApplicationUserId == id).ToList();
 
-            var user = _applicationUserRepository.GetById(id);
+            var user = _uow.GetRepository<ApplicationUser>().GetById(id);
             var list = new List<AccounListModel>();
             ViewBag.FullName = user.Name + " " + user.Surname;
 
@@ -68,7 +78,7 @@ namespace BankApp.Web.Controllers
         [HttpGet]
         public IActionResult SendMoney(int id)
         {
-            var query = _accountRepository.GetQueryable();
+            var query = _uow.GetRepository<Account>().GetQueryable();
             var accounts = query.Where(x => x.Id != id).ToList();
 
             
@@ -93,14 +103,16 @@ namespace BankApp.Web.Controllers
         [HttpPost]
         public IActionResult SendMoney(SendMoneyModel sendMoneyModel)
         {
-            var sendAccount = _accountRepository.GetById(sendMoneyModel.SenderId);
+            var sendAccount = _uow.GetRepository<Account>().GetById(sendMoneyModel.SenderId);
 
             sendAccount.Balance -= sendMoneyModel.Amount;
-            _accountRepository.Update(sendAccount);
+            _uow.GetRepository<Account>().Update(sendAccount);
 
-            var account =_accountRepository.GetById(sendMoneyModel.AccountId);
+            var account =_uow.GetRepository<Account>().GetById(sendMoneyModel.AccountId);
             account.Balance += sendMoneyModel.Amount;
-            _accountRepository.Update(account);
+            _uow.GetRepository<Account>().Update(account);
+
+            _uow.SaveChanges();
 
             return RedirectToAction("Index","Home");
         }

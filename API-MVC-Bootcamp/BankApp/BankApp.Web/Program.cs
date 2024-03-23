@@ -1,6 +1,7 @@
 using BankApp.Web.Data.Context;
 using BankApp.Web.Data.Interfaces;
 using BankApp.Web.Data.Repositories;
+using BankApp.Web.Data.UnitOfWork;
 using BankApp.Web.Mapping;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,13 @@ namespace BankApp.Web
                 opt.UseSqlServer("server=MAKINA\\SQLEXPRESS01; database= BankDb; integrated security=true;TrustServerCertificate=True");
             });
 
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            builder.Services.AddScoped<IAccountMapper, AccountMapper>();
-            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            //builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            //builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IUow, Uow>();
+            builder.Services.AddScoped<IAccountMapper, AccountMapper>();            
             builder.Services.AddScoped<IUserMapper, UserMapper>();
-            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+           
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
