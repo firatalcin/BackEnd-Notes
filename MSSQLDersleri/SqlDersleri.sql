@@ -142,5 +142,38 @@ select MusteriAdi, MusteriUnvani from Musteriler
 select SatisID, UrunID, SUM(Miktar) from [Satis Detaylari]
 Group By SatisID, UrunID With Rollup
 
+-- Case - When - Else - End
 
+select Adi, SoyAdi, 
+case
+when UnvanEki = 'Mrs.' or UnvanEki = 'Ms.' then 'Kadýn'
+when UnvanEki = 'Mr.' then 'Erkek'
+else UnvanEki
+end
+UnvanEki from Personeller
+
+-- Subquery Komutu
+
+select * from Personeller p 
+inner join Satislar s on p.PersonelID = s.PersonelID
+where Adi = 'Nancy'
+
+select SatisID, SatisTarihi from Satislar where PersonelID = (select PersonelID from Personeller where Adi = 'Nancy')
+
+-- Truncate Table Komutu (Identity baþtan baþlatýr)
+
+Truncate Table Personeller 
+
+-- @@Identity Komutu (Son eklenen deðerin Id'sini döndürür)
+
+Insert Kategoriler(KategoriAdi, Tanimi) values ('X', 'X Kategorisi')
+select @@IDENTITY
+
+-- IsNull Fonksiyonu ile Null Kontrolü
+
+Select MusteriAdi, ISNULL(Bolge, 'Bölge Bilinmiyor') from Musteriler
+
+-- Veritabaný içindeki bütün tablolara ulaþmak için
+
+select * from sys.tables
 
