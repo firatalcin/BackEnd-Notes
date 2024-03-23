@@ -3,6 +3,7 @@ using BankApp.Web.Data.Interfaces;
 using BankApp.Web.Mapping;
 using BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BankApp.Web.Controllers
 {
@@ -60,11 +61,48 @@ namespace BankApp.Web.Controllers
                     ApplicationUserId = account.ApplicationUserId,
                     Id = account.Id
                 });
-            }
+            }          
+            return View(list);
+        }
+
+        [HttpGet]
+        public IActionResult SendMoney(int id)
+        {
+            var query = _accountRepository.GetQueryable();
+            var accounts = query.Where(x => x.Id != id).ToList();
 
             
+            var list = new List<AccounListModel>();
 
-            return View(list);
+            ViewBag.SenderId = id;
+
+            foreach (var item in accounts)
+            {
+                list.Add(new AccounListModel
+                {
+                    AccountNumber = item.AccountNumber,
+                    Balance = item.Balance,
+                    ApplicationUserId = item.ApplicationUserId,
+                    Id = item.Id
+                });
+            }
+
+            return View(new SelectList(list,"Id","AccountNumber"));
+        }
+
+        [HttpPost]
+        public IActionResult SendMoney(SendMoneyModel sendMoneyModel)
+        {
+            var sendAccount = _accountRepository.GetById(sendMoneyModel.SenderId);
+
+            sendAccount.Balance -= sendMoneyModel.Amount;
+            _accountRepository.Update(sendAccount);
+
+            var account =_accountRepository.GetById(sendMoneyModel.AccountId);
+            account.Balance += sendMoneyModel.Amount;
+            _accountRepository.Update(account);
+
+            return RedirectToAction("Index","Home");
         }
     }
 }
