@@ -1,3 +1,4 @@
+using BlogApp.Data.Concrete;
 using BlogApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ namespace BlogApp
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            SeedData.LoadToSeedData(app); 
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
