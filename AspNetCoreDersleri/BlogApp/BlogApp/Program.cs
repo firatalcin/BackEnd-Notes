@@ -1,3 +1,6 @@
+using BlogApp.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace BlogApp
 {
     public class Program
@@ -5,6 +8,11 @@ namespace BlogApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<BlogContext>(opt =>
+            {
+                opt.UseSqlite(builder.Configuration.GetConnectionString("sql_connection"));
+            });
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
