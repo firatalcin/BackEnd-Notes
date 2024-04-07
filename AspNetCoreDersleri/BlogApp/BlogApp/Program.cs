@@ -1,5 +1,7 @@
 using BlogApp.Data.Concrete;
+using BlogApp.Data.Concrete.EfCore;
 using BlogApp.Data.Context;
+using BlogApp.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp
@@ -29,6 +31,8 @@ namespace BlogApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            builder.Services.AddScoped<IPostRepository, EfPostRepository>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

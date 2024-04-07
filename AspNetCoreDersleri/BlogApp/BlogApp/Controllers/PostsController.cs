@@ -1,21 +1,22 @@
 ﻿using BlogApp.Data.Context;
+using BlogApp.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly BlogContext _context;
+        private readonly IPostRepository _postRepository;
 
-        public PostsController(BlogContext context)
+        public PostsController(IPostRepository postRepository)
         {
-            _context = context;
+            _postRepository = postRepository;
         }
 
         public IActionResult Index()
         {
 
-            return View(_context.Posts.ToList());
+            return View();
         }
     }
 }
