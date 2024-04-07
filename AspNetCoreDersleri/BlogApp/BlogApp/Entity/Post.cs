@@ -6,6 +6,7 @@
         public string? Title { get; set; }
         public string? Content { get; set; }
         public DateTime PublishedOn { get; set; }
+        public string? Image { get; set; }
         public bool IsActive { get; set; }
 
         public int UserId { get; set; }
