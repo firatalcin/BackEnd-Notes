@@ -32,7 +32,7 @@ namespace EFCore.Identity.API
 
                 opt.User.RequireUniqueEmail = true;
 
-            }).AddEntityFrameworkStores<AppDbContext>();
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             var app = builder.Build();
 

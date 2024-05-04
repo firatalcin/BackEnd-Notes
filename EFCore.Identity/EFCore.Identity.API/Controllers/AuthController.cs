@@ -57,5 +57,41 @@ namespace EFCore.Identity.API.Controllers
             return NoContent(); 
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ForgotPassword(string email, CancellationToken cancellationToken)
+        {
+            AppUser? appUser = await _userManager.FindByEmailAsync(email);
+
+            if (appUser is null)
+            {
+                return BadRequest(new { Message = "Kullanıcı Bulunamadı" });
+            }
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+
+            return Ok(new {Token = token});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePasswordUsingToken(ChangePasswordUsingTokenDto request, CancellationToken cancellationToken)
+        {
+            AppUser? appUser = await _userManager.FindByEmailAsync(request.Email);
+
+            if (appUser is null)
+            {
+                return BadRequest(new { Message = "Kullanıcı Bulunamadı" });
+            }
+
+            IdentityResult result = await _userManager.ResetPasswordAsync(appUser, request.Token, request.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.Select(x => x.Description));
+            }
+
+            return NoContent();
+
+        }
     }
 }
