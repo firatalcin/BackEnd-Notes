@@ -5,7 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Identity.API.Context
 {
-    public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
+    public class AppDbContext : 
+        IdentityDbContext
+        <
+        AppUser, 
+        AppRole, 
+        Guid, 
+        IdentityUserClaim<Guid>,
+        AppUserRole,
+        IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>,
+        IdentityUserToken<Guid>
+        >
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {

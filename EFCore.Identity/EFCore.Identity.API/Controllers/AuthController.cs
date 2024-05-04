@@ -20,7 +20,7 @@ namespace EFCore.Identity.API.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDto request, CancellationToken cancellationToken)
         {
             AppUser appUser = new AppUser()
@@ -40,7 +40,7 @@ namespace EFCore.Identity.API.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto, CancellationToken cancellationToken)
         {
             AppUser? appUser = await _userManager.FindByIdAsync(changePasswordDto.Id.ToString());
@@ -76,7 +76,7 @@ namespace EFCore.Identity.API.Controllers
             return Ok(new {Token = token});
         }
 
-        [HttpPost]
+        [HttpPost("ChangePasswordUsingToken")]
         public async Task<IActionResult> ChangePasswordUsingToken(ChangePasswordUsingTokenDto request, CancellationToken cancellationToken)
         {
             AppUser? appUser = await _userManager.FindByEmailAsync(request.Email);
@@ -97,7 +97,7 @@ namespace EFCore.Identity.API.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto request, CancellationToken cancellationToken)
         {
             AppUser? appUser = await _userManager.Users.FirstOrDefaultAsync(p => p.Email == request.UserNameOrEmail || p.UserName == request.UserNameOrEmail, cancellationToken);
@@ -118,7 +118,7 @@ namespace EFCore.Identity.API.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("LoginWithSignInManager")]
         public async Task<IActionResult> LoginWithSignInManager(LoginDto request, CancellationToken cancellationToken)
         {
             AppUser? appUser = await _userManager.Users.FirstOrDefaultAsync(p => p.Email == request.UserNameOrEmail || p.UserName == request.UserNameOrEmail, cancellationToken);

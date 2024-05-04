@@ -22,7 +22,7 @@ namespace EFCore.Identity.API
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("mssql"));
             });
 
-            builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(opt =>
+            builder.Services.AddIdentity<AppUser, AppRole>(opt =>
             {
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
