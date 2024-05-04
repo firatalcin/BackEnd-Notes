@@ -36,5 +36,26 @@ namespace EFCore.Identity.API.Controllers
 
             return NoContent();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto, CancellationToken cancellationToken)
+        {
+            AppUser? appUser = await _userManager.FindByIdAsync(changePasswordDto.Id.ToString());
+
+            if (appUser is null)
+            {
+                return BadRequest(new { Message = "Kullanıcı Bulunamadı" });
+            }
+
+            IdentityResult result = await _userManager.ChangePasswordAsync(appUser, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.Select(x => x.Description));
+            }
+
+            return NoContent(); 
+
+        }
     }
 }
