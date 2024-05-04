@@ -1,5 +1,7 @@
 
 using EFCore.Identity.API.Context;
+using EFCore.Identity.API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Identity.API
@@ -19,6 +21,18 @@ namespace EFCore.Identity.API
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("mssql"));
             });
+
+            builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(opt =>
+            {
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 1;
+                opt.Password.RequireNonAlphanumeric = false;
+
+                opt.User.RequireUniqueEmail = true;
+
+            }).AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
 
