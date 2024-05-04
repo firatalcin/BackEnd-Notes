@@ -32,6 +32,10 @@ namespace EFCore.Identity.API
 
                 opt.User.RequireUniqueEmail = true;
 
+                opt.SignIn.RequireConfirmedEmail = true;
+                opt.Lockout.MaxFailedAccessAttempts = 3;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
+
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             var app = builder.Build();
