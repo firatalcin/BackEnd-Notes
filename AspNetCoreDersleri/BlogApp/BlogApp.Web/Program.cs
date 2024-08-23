@@ -1,3 +1,4 @@
+using BlogApp.Web.Data.Abstract;
 using BlogApp.Web.Data.Concrete.EFCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,8 @@ namespace BlogApp.Web
             {
                 opt.UseSqlite(builder.Configuration.GetConnectionString("sqlCon"));
             });
+
+            builder.Services.AddScoped<IPostRepository, EfPostRepository>
             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
