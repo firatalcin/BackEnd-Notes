@@ -1,0 +1,12 @@
+﻿@model List<Post>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <p>@item.Title</p>
+}
+
