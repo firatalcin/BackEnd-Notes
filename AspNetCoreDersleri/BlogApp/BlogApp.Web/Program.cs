@@ -16,6 +16,7 @@ namespace BlogApp.Web
             });
 
             builder.Services.AddScoped<IPostRepository, EfPostRepository>();
+            builder.Services.AddScoped<ITagRepository, EfTagRepository>();
             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
