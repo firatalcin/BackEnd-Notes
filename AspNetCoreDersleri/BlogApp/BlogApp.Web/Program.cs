@@ -15,7 +15,7 @@ namespace BlogApp.Web
                 opt.UseSqlite(builder.Configuration.GetConnectionString("sqlCon"));
             });
 
-            builder.Services.AddScoped<IPostRepository, EfPostRepository>
+            builder.Services.AddScoped<IPostRepository, EfPostRepository>();
             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -43,7 +43,7 @@ namespace BlogApp.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Posts}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -1,5 +1,4 @@
 ﻿using BlogApp.Web.Data.Abstract;
-using BlogApp.Web.Data.Concrete.EFCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Web.Controllers
