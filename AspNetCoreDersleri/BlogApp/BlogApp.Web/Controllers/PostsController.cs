@@ -1,6 +1,7 @@
 ﻿using BlogApp.Web.Data.Abstract;
 using BlogApp.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Web.Controllers
 {
@@ -22,6 +23,11 @@ namespace BlogApp.Web.Controllers
                 Posts = _postRepository.Posts.ToList(),
                 Tags = _tagRepository.Tags.ToList()
             });
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            return View(await _postRepository.Posts.FirstOrDefaultAsync(x => x.Id == id));
         }
     }
 }
