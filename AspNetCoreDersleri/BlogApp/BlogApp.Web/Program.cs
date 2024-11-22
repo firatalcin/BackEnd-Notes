@@ -1,3 +1,4 @@
+using BlogApp.Web.Data.Abstract;
 using BlogApp.Web.Data.Concrete.EfCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPostRepository, EfPostRepository>();
 
 var app = builder.Build();
 
