@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IPostRepository, EfPostRepository>();
+builder.Services.AddScoped<ITagRepository, EfTagRepository>();
 
 var app = builder.Build();
 

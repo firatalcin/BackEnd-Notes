@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+body {
+  background-color: #eff2f6;
+}
+
+a {
+  text-decoration: none;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+}
