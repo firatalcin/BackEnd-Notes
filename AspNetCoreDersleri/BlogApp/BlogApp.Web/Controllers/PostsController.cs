@@ -2,6 +2,7 @@
 using BlogApp.Web.Data.Concrete.EfCore;
 using BlogApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Web.Controllers;
 
@@ -24,5 +25,10 @@ public class PostsController : Controller
         {
             Posts = list
         });
+    }
+
+    public async Task<IActionResult> Details(string url)
+    {
+        return View(await _postRepository.Posts.FirstOrDefaultAsync(p => p.Url == url));
     }
 }
