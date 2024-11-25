@@ -18,13 +18,16 @@ public class PostsController : Controller
     }
 
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index(string tag)
     {
-        var list = _postRepository.Posts.ToList();
-        return View(new PostsViewModel
+        var posts = _postRepository.Posts.Where(i => i.IsActive);
+
+        if(!string.IsNullOrEmpty(tag))
         {
-            Posts = list
-        });
+            posts = posts.Where(x => x.Tags.Any(t => t.Url == tag));
+        }
+
+        return View( new PostsViewModel { Posts = await posts.ToListAsync() });
     }
 
     public async Task<IActionResult> Details(string url)
