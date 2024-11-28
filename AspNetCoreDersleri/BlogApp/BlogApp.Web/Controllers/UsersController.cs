@@ -41,6 +41,7 @@ public class UsersController : Controller
                 userClaims.Add(new Claim(ClaimTypes.NameIdentifier, isUser.Id.ToString()));
                 userClaims.Add(new Claim(ClaimTypes.Name, isUser.UserName ?? ""));
                 userClaims.Add(new Claim(ClaimTypes.Email, isUser.Email ?? ""));
+                userClaims.Add(new Claim(ClaimTypes.UserData, isUser.Image ?? ""));
 
                 if (isUser.Email == "info@sadikturan.com")
                 {
