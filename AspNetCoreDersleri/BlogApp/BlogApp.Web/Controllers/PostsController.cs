@@ -98,6 +98,22 @@ public class PostsController : Controller
             return RedirectToAction("Index");
         }
         return View(model);
-    }       
+    }    
+    
+    [Authorize]
+    public async Task<IActionResult> List()
+    {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "");
+        var role = User.FindFirstValue(ClaimTypes.Role);
+
+        var posts = _postRepository.Posts;
+
+        if(string.IsNullOrEmpty(role))
+        {
+            posts = posts.Where(i => i.UserId == userId);
+        }
+
+        return View(await posts.ToListAsync());
+    }  
     
 }
