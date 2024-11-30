@@ -3,6 +3,7 @@ using BlogApp.Web.Data.Abstract;
 using BlogApp.Web.Data.Concrete.EfCore;
 using BlogApp.Web.Entities;
 using BlogApp.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,4 +69,35 @@ public class PostsController : Controller
         });
 
     }
+    
+    [Authorize]
+    public IActionResult Create()
+    {
+        return View();
+    }   
+
+    [HttpPost]
+    [Authorize]
+    public IActionResult Create(PostCreateViewModel model)
+    {
+        if(ModelState.IsValid)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            _postRepository.CreatePost(
+                new Post {
+                    Title = model.Title,
+                    Content = model.Content,
+                    Url = model.Url,
+                    UserId = int.Parse(userId ?? ""),
+                    PublishedOn = DateTime.Now,
+                    Image = "1.jpg",
+                    IsActive = false
+                }
+            );
+            return RedirectToAction("Index");
+        }
+        return View(model);
+    }       
+    
 }
