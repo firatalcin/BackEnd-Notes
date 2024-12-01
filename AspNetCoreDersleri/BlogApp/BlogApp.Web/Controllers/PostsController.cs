@@ -116,4 +116,55 @@ public class PostsController : Controller
         return View(await posts.ToListAsync());
     }  
     
+    [Authorize]
+    public IActionResult Edit(int? id)
+    {
+        if(id == null)
+        {
+            return NotFound();
+        }
+        var post = _postRepository.Posts.Include(i=>i.Tags).FirstOrDefault(i=>  i.Id == id);
+        if(post == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Tags = _tagRepository.Tags.ToList();
+
+        return View(new PostCreateViewModel {
+            PostId = post.Id,
+            Title = post.Title,
+            Description = post.Description,
+            Content = post.Content,
+            Url = post.Url,
+            IsActive = post.IsActive,
+            Tags = post.Tags
+        });
+    }
+
+    [Authorize]
+    [HttpPost]
+    public IActionResult Edit(PostCreateViewModel model, int[] tagIds)
+    {
+        if(ModelState.IsValid)
+        {
+            var entityToUpdate = new Post {
+                Id = model.PostId,
+                Title = model.Title,
+                Description = model.Description,
+                Content = model.Content,
+                Url = model.Url
+            };
+
+            if(User.FindFirstValue(ClaimTypes.Role) == "admin") 
+            {
+                entityToUpdate.IsActive = model.IsActive;
+            }
+
+            _postRepository.EditPost(entityToUpdate,tagIds);
+            return RedirectToAction("List");
+        }
+        ViewBag.Tags = _tagRepository.Tags.ToList();
+        return View(model);
+    }
 }
