@@ -14,6 +14,18 @@ builder.Services.AddDbContext<IdentityContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("sqlLite"));
 }).AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    opt.Password.RequiredLength = 6;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequireUppercase = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireDigit = false;
+
+    opt.User.RequireUniqueEmail = true;
+    //opt.User.AllowedUserNameCharacters = "abc"; 
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
