@@ -18,14 +18,14 @@ public static class SeedData
             context.Database.Migrate();
         }
 
-        var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
         var user = await userManager.FindByNameAsync(adminUser);
 
         if(user == null)
         {
-            user = new IdentityUser() {
-                //FullName = "Fırat Alçın",
+            user = new AppUser() {
+                FullName = "Fırat Alçın",
                 UserName = adminUser,
                 Email = "admin@firatalcin.com",
                 PhoneNumber = "44444444"                    

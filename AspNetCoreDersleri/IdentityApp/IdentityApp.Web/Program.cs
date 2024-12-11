@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<IdentityContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("sqlLite"));
-}).AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+}).AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<IdentityContext>();
 
 builder.Services.Configure<IdentityOptions>(opt =>
 {
