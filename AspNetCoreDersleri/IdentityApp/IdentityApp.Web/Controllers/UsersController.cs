@@ -120,4 +120,16 @@ public class UsersController : Controller
         }
         return RedirectToAction("Index");
     }
+
+    public async Task<IActionResult> Delete(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+
+        if (user != null)
+        {
+            var result = await _userManager.DeleteAsync(user);
+        }
+        
+        return RedirectToAction("Index");
+    }
 }
