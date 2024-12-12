@@ -2,17 +2,21 @@
 using IdentityApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityApp.Web.Controllers;
 
 public class UsersController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
+    private readonly RoleManager<AppRole> _roleManager;
 
-    public UsersController(UserManager<AppUser> userManager)
+    public UsersController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
     {
+        _roleManager = roleManager;
         _userManager = userManager;
     }
+    
 
 
     // GET
@@ -67,11 +71,14 @@ public class UsersController : Controller
 
         if (user != null)
         {
+            ViewBag.Roles = await _roleManager.Roles.Select(x => x.Name).ToListAsync();
+            
             return View(new EditViewModel()
             {
                 Id = user.Id,
                 Email = user.Email,
                 FullName = user.FullName,
+                SelectedRoles = await _userManager.GetRolesAsync(user)
             });
         }
         else
@@ -107,6 +114,12 @@ public class UsersController : Controller
                 }
                 else if (result.Succeeded)
                 {
+                    await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
+                    if(model.SelectedRoles != null)
+                    {
+                        await _userManager.AddToRolesAsync(user, model.SelectedRoles);
+                    }
+                    
                     return RedirectToAction("Index");
                 }
                 else
