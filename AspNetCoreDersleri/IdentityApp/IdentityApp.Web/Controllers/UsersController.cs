@@ -38,7 +38,7 @@ public class UsersController : Controller
         {
             var user = new AppUser()
             {
-                UserName = model.Email.Split("@")[0],
+                UserName = model.UserName,
                 Email = model.Email,
                 FullName = model.FullName,
             };
