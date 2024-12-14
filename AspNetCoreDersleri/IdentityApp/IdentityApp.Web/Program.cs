@@ -27,6 +27,8 @@ builder.Services.Configure<IdentityOptions>(opt =>
     
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
     opt.Lockout.MaxFailedAccessAttempts = 3;
+    
+    opt.SignIn.RequireConfirmedEmail = true;
 });
 
 builder.Services.ConfigureApplicationCookie(opt =>
