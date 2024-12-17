@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductApi.Models;
 
 namespace ProductApi.Controllers
 {
@@ -7,21 +8,28 @@ namespace ProductApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private static readonly string[] Products = new []
+        private static List<Product> _products;
+
+        public ProductsController()
         {
-            "IPhone X", "IPhone 16 Pro", "IPhone 16 Pro Plus",
-        };
+            _products = new List<Product>()
+            {
+                new Product(){Id = 1, Name = "IPhone X", Price = 60000, Status = true},
+                new Product(){Id = 2, Name = "IPhone 16", Price = 90000, Status = true},
+                new Product(){Id = 3, Name = "IPhone 16 Pro Plus", Price = 10000, Status = true},
+            };
+        }
         
         [HttpGet]
-        public string[] GetProducts()
+        public List<Product> GetProducts()
         {
-            return Products;
+            return _products;
         }
         
         [HttpGet("{id}")]
-        public string GetProduct(int id)
+        public Product GetProduct(int id)
         {
-            return Products[id];
+            return _products.FirstOrDefault(p => p.Id == id);
         }
     }
 }
