@@ -21,15 +21,31 @@ namespace ProductApi.Controllers
         }
         
         [HttpGet]
-        public List<Product> GetProducts()
+        public IActionResult GetProducts()
         {
-            return _products;
+            if (_products == null)
+            {
+                return NotFound();
+            }
+            return Ok(_products);
         }
         
         [HttpGet("{id}")]
-        public Product GetProduct(int id)
+        public IActionResult GetProduct(int? id)
         {
-            return _products.FirstOrDefault(p => p.Id == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            var product = _products?.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();  
+            }
+            
+            return Ok(product);
         }
     }
 }
