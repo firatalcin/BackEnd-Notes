@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductApi.Models;
 
 namespace ProductApi.Controllers
@@ -8,37 +9,29 @@ namespace ProductApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private static List<Product> _products;
+        private readonly ProductContext _context;
 
-        public ProductsController()
+        public ProductsController(ProductContext context)
         {
-            _products = new List<Product>()
-            {
-                new Product(){Id = 1, Name = "IPhone X", Price = 60000, Status = true},
-                new Product(){Id = 2, Name = "IPhone 16", Price = 90000, Status = true},
-                new Product(){Id = 3, Name = "IPhone 16 Pro Plus", Price = 10000, Status = true},
-            };
+            _context = context;
         }
         
         [HttpGet]
-        public IActionResult GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            if (_products == null)
-            {
-                return NotFound();
-            }
-            return Ok(_products);
+            var list = await _context.Products.ToListAsync();
+            return Ok(list);
         }
         
         [HttpGet("{id}")]
-        public IActionResult GetProduct(int? id)
+        public async Task<IActionResult> GetProduct(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
             
-            var product = _products?.FirstOrDefault(p => p.Id == id);
+            var product = await _context.Products.FindAsync(id);
 
             if (product == null)
             {
