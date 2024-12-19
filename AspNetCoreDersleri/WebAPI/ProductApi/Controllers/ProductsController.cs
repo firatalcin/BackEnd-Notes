@@ -49,5 +49,30 @@ namespace ProductApi.Controllers
 
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(int? id, Product product)
+        {
+            if (id != product.Id)
+            {
+                return BadRequest();
+            }
+            
+            var productQuery = await _context.Products.FindAsync(id);
+            productQuery.Name = product.Name;
+            productQuery.Price = product.Price;
+            productQuery.Status = product.Status;
+            
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+            
+            return NoContent();
+        }
     }
 }
