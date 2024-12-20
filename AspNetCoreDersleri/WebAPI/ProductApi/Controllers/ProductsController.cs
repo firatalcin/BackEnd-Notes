@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProductApi.Dtos;
 using ProductApi.Models;
 
 namespace ProductApi.Controllers
@@ -19,7 +20,8 @@ namespace ProductApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            var list = await _context.Products.ToListAsync();
+            var list = await _context.Products.Select(x => GetProductDto(x)).ToListAsync();
+
             return Ok(list);
         }
         
@@ -31,14 +33,15 @@ namespace ProductApi.Controllers
                 return NotFound();
             }
             
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
 
             if (product == null)
             {
                 return NotFound();  
             }
+
             
-            return Ok(product);
+            return Ok(GetProductDto(product));
         }
 
         [HttpPost]
@@ -102,6 +105,16 @@ namespace ProductApi.Controllers
             }
 
             return NoContent();
+        }
+
+        private static ProductDto GetProductDto(Product product)
+        {
+            return new ProductDto()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price
+            };
         }
     }
 }
